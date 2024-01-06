@@ -1,7 +1,9 @@
+import Heading from "@/components/Heading";
+
 export default function CadastroProduto(){
     return (
         <main>
-            <h2>Cadastro Produtos</h2>
+            <Heading tag="h2">Cadastro Produto</Heading>
         </main>
     )
 }
