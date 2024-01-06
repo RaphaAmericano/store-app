@@ -28,7 +28,7 @@ function getInputValidationCSS(field:ValidationSchemaKeys, errors: FieldErrors<V
 
 const Form = (props: FormProps) => {
     const { successCallback, failCallback } = props;
-    const { register, handleSubmit,  watch, formState: { errors, isDirty  } } = useForm<ValidationSchema>({
+    const { register, handleSubmit,  watch, formState: { errors, isDirty } } = useForm<ValidationSchema>({
         resolver: zodResolver(validationSchema),
         defaultValues
     });
@@ -41,8 +41,8 @@ const Form = (props: FormProps) => {
         failCallback()
     }
 
-    const emailClassName = isDirty ?  getInputValidationCSS("email", errors) : "" ;
-    const passwordClassName = isDirty ?  getInputValidationCSS("password", errors) : "" ;
+    const emailClassName = isDirty ? getInputValidationCSS("email", errors) : "" ;
+    const passwordClassName = isDirty ? getInputValidationCSS("password", errors) : "" ;
     
     return <form  onSubmit={handleSubmit(submit, error)} >
         <div className="grid w-full items-center gap-4">
