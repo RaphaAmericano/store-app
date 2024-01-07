@@ -3,9 +3,7 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
+    CardHeader
 } from "@/components/ui/card"
 import Form from "./Form";
 import useProductStore from "@/app/_store/ProductsStore";
@@ -15,8 +13,8 @@ import { useToast } from "@/components/ui/use-toast";
 
 const ProductForm = () => {
     const { toast } = useToast()
-    const { actions } = useProductStore()
-    const { addProduct } = actions;
+    const { actions: { addProduct } } = useProductStore()
+
     function saveProduct(product:ProductProps){
         addProduct(product);
         toast({

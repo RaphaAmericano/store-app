@@ -3,7 +3,8 @@ import { create } from "zustand";
 
 interface ActionsProps {
     addProduct: (product: ProductProps) => void;
-    removeProduct: (id: number) => void
+    getProduct: (id:string) => ProductProps | undefined,
+    removeProduct: (id: string) => void
 }
 
 interface StoreProps {
@@ -13,7 +14,7 @@ interface StoreProps {
     actions: ActionsProps
 }
 
-const useProductStore = create<StoreProps>((set) => ({
+const useProductStore = create<StoreProps>((set, get) => ({
     state:{
         products:[]
     },
@@ -21,7 +22,8 @@ const useProductStore = create<StoreProps>((set) => ({
         addProduct: (product:ProductProps) => set((state) => ({ 
             state: { products: [...state.state.products, product]}
         })),
-        removeProduct: (id:number) => set((state) => ({state: {
+        getProduct: (id:string) => get().state.products.find((product) => product.id === id),
+        removeProduct: (id:string) => set((state) => ({state: {
             products: state.state.products.filter((product) => product.id !== id)
         }}))
     }
