@@ -5,7 +5,7 @@ import ProductCard from "./ProductCard";
 const Products = () => {
     const { state: { products }} = useProductStore()
     
-    return <div className="grid grid-cols-3 gap-2">
+    return <div className="grid grid-cols-3 gap-1">
         {products && products.map((product) => <ProductCard key={product.id} {...product} /> )}
     </div>
 }

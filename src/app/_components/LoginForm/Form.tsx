@@ -26,7 +26,7 @@ function getInputValidationCSS(field:ValidationSchemaKeys, errors: FieldErrors<V
     return "border-red-500"
 }
 
-const Form = (props: FormProps) => {
+const Form = (props: FormProps<any, any>) => {
     const { successCallback, failCallback } = props;
     const { register, handleSubmit,  watch, formState: { errors, isDirty } } = useForm<ValidationSchema>({
         resolver: zodResolver(validationSchema),
