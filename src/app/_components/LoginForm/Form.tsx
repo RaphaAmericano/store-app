@@ -2,13 +2,13 @@
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { FormProps } from "./Form.props"
 import { FieldErrors, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
+import { FormProps } from "@/types/Form.props";
 
 const validationSchema = z.object({
-    email: z.string().min(1, { message: "Tamanho mínimo é 1"}).email({   message: "Must be a valid email" }),
+    email: z.string().min(1, { message: "Tamanho mínimo é 1"}).email({   message: "Deve ser um email válido" }),
     password: z.string().min(6, { message: "Tamanho mínimo é 6" })
 })
 
