@@ -8,16 +8,14 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import Form from "./Form";
-import useProductStore from "@/app/_store/ProductsProvider";
+import useProductStore from "@/app/_store/ProductsStore";
 import { ProductProps } from "@/types/Product.props";
 import { useToast } from "@/components/ui/use-toast";
 
 
 const ProductForm = () => {
     const { toast } = useToast()
-    const { state, actions } = useProductStore()
-    const { products } = state;
-    console.log(products)
+    const { actions } = useProductStore()
     const { addProduct } = actions;
     function saveProduct(product:ProductProps){
         addProduct(product);
@@ -27,14 +25,14 @@ const ProductForm = () => {
         })
     }
 
-    return <Card className="w-[350px]">
-    <CardHeader>
-        <CardDescription>Preencha o formulário para cadastrar um novo produto.</CardDescription>
-    </CardHeader>
-    <CardContent>
-        <Form successCallback={saveProduct} failCallback={() => console.log(0)}/>
-    </CardContent>
-</Card>
+    return  <Card className="w-[350px]">
+                <CardHeader>
+                    <CardDescription>Preencha o formulário para cadastrar um novo produto.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Form successCallback={saveProduct} failCallback={() => console.log(0)}/>
+                </CardContent>
+            </Card>
 }
 
 export default ProductForm;
