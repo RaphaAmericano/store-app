@@ -5,7 +5,6 @@ import Container from '@/components/Container'
 import Providers from './store/Providers'
 import MainMenu from './_components/MainMenu'
 
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -22,10 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <MainMenu />
-          <Container>
-            {children}
-          </Container>
+            <MainMenu />
+            <Container>
+              {children}
+            </Container>
         </Providers>
       </body>
     </html>

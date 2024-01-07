@@ -7,3 +7,7 @@ export function getInputValidationCSS<T extends keyof any, K extends object >(fi
     }
     return "border-red-500"
 }
+
+export function getNumericValueOfStringPrice(value:string){
+    return parseFloat(value.replace(/[^0-9,-]/g, '').replace(',', '.'));
+}

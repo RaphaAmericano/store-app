@@ -1,4 +1,4 @@
-export interface FormProps {
-    successCallback: () => void;
-    failCallback: () => void
+export interface FormProps<S, F> {
+    successCallback: (value?:S) => void;
+    failCallback: (value?:F) => void
 }
