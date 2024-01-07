@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Container from '@/components/Container'
-import Providers from './store/Providers'
+import Providers from './_store/Providers'
 import MainMenu from './_components/MainMenu'
+import { Toaster } from '@/components/ui/toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,6 +27,7 @@ export default function RootLayout({
               {children}
             </Container>
         </Providers>
+        <Toaster />
       </body>
     </html>
   )
