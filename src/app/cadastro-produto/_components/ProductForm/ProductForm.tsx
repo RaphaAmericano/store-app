@@ -9,6 +9,7 @@ import Form from "./Form";
 import useProductStore from "@/app/_store/ProductsStore";
 import { ProductProps } from "@/types/Product.props";
 import { useToast } from "@/components/ui/use-toast";
+import { getFormatedPrice } from "@/utils/generic.utils";
 
 
 const ProductForm = () => {
@@ -19,7 +20,7 @@ const ProductForm = () => {
         addProduct(product);
         toast({
             title: `Novo produto ${product.name} salvo com sucess`,
-            description: `Nome: ${product.name}\nPreço:${product.price}\nDescrição:${product.description}`
+            description: `Nome: ${product.name}\nPreço:${getFormatedPrice(product.price)}\nDescrição:${product.description}`
         })
     }
 

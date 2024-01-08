@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card"
 import { ProductProps } from "@/types/Product.props";
 import useCartStore from "@/app/_store/CartStore";
+import { getFormatedPrice } from "@/utils/generic.utils";
 
 const ProductCard = (props:ProductProps) => {
     const { actions: { addProduct } } = useCartStore()
@@ -27,7 +28,7 @@ const ProductCard = (props:ProductProps) => {
                 <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
                 <div className="space-y-1">
                     <p className="text-sm font-medium leading-none">
-                    {price}
+                    {getFormatedPrice(price)}
                     </p>
                     <p className="text-sm text-muted-foreground">
                     {description}
