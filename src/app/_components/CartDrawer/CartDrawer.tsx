@@ -11,9 +11,10 @@ import {
 } from "@/components/ui/sheet"
 import useCartStore from "@/app/_store/CartStore"
 import ProductInput from "./ProductInput"
+import CartResume from "./CartResume"
 
 const CartDrawer = () => {
-    const { state:{ cart }, actions:{ addProduct, removeProduct, clearCart } } = useCartStore()
+    const { state:{ cart }, actions:{ clearCart } } = useCartStore()
     return <>
     <SheetHeader>
       <SheetTitle>Seus produtos</SheetTitle>
@@ -22,8 +23,9 @@ const CartDrawer = () => {
       </SheetDescription>
     </SheetHeader>
     <div className="grid gap-4 py-4">
-      {cart && cart.map((id) => <ProductInput key={id} id={id} />)}
+      {cart && cart.map((product) => <ProductInput key={product.productId} {...product} />)}
     </div>
+    <CartResume />
     <SheetFooter>
       <Button onClick={clearCart}>Esvaziar carrinho</Button>
       <SheetClose asChild>
