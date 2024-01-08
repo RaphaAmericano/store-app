@@ -17,6 +17,7 @@ const ProductInput = ({ productId, quantity }:CartProps ) => {
         return <div>Erro ao carregar o produto</div>
     }
     const { name, price } = product; 
+    
     function updateQuantity(event: ChangeEvent<HTMLInputElement>){
         const { value:quantity } = event.target;
         setProductQuantity(productId, parseInt(quantity))

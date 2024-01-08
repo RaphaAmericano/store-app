@@ -8,7 +8,9 @@ import Drawer from "@/components/Drawer"
 import CartDrawer from "../CartDrawer"
 
 const MainMenu = () => {
-    const { status } = useSession()
+    const { data, status } = useSession();
+    console.log(status);
+    console.log(data);
     const router = useRouter();
     const menuItems = [
         {
@@ -24,10 +26,19 @@ const MainMenu = () => {
         {
             text: "Sign Out",
             separatorAfter: false,
-            onClickFn: () => signOut()
+            onClickFn: async () => {
+                await signOut({
+                    redirect: false
+                })
+                router.replace("/")
+            }
         },
     ]
     const items = menuItems.map(formatMenuItem);
+
+    if(status !== "authenticated" ){
+        return 
+    }
 
     return <Menubar >
         <BarMenu menuTitle="Menu">{items}</BarMenu>

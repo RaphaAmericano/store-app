@@ -28,16 +28,19 @@ function getInputValidationCSS(field:ValidationSchemaKeys, errors: FieldErrors<V
 
 const Form = (props: FormProps<any, any>) => {
     const { successCallback, failCallback } = props;
-    const { register, handleSubmit,  watch, formState: { errors, isDirty } } = useForm<ValidationSchema>({
+    const { register, handleSubmit, reset, formState: { errors, isDirty } } = useForm<ValidationSchema>({
         resolver: zodResolver(validationSchema),
         defaultValues
     });
 
-    function submit(){
-        successCallback()
+    function submit(data:ValidationSchema){
+        console.log(data)
+        successCallback(data)
+        reset(defaultValues)
     }
 
-    function error(){
+    function error(error: any){
+        console.log(error)
         failCallback()
     }
 
