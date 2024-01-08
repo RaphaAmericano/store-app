@@ -1,12 +1,14 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './../globals.css'
+import MainMenu from './_components/MainMenu'
+import { Toaster } from '@/components/ui/toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Teste',
-  description: 'Vamos testar',
+  title: 'Store App',
+  description: 'Aplicação de exemplo',
 }
 
 export default function RootLayout({
@@ -16,8 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-          {children}            
+      <body className={inter.className}>  
+        <MainMenu />
+        {children}
+        <Toaster />    
       </body>
     </html>
   )

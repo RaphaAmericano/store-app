@@ -7,11 +7,11 @@ import { BarMenuProps } from "./BarMenu.props";
 
 
 
-const Menu = (props: BarMenuProps) => {
+const BarMenu = (props: BarMenuProps) => {
   const { menuTitle, children } = props;
   return (
     <MenubarMenu>
-      <MenubarTrigger>{menuTitle}</MenubarTrigger>
+      <MenubarTrigger className="cursor-pointer">{menuTitle}</MenubarTrigger>
       <MenubarContent>
         {children}
       </MenubarContent>
@@ -19,4 +19,4 @@ const Menu = (props: BarMenuProps) => {
   );
 };
 
-export default Menu;
+export default BarMenu;

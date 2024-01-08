@@ -38,13 +38,11 @@ export const options: NextAuthOptions = {
     //     signIn: "/"
     // },
     callbacks: {
-        async jwt({ token, user }){
-            user && (token.user = user)
-            return token
+        async jwt(data){
+            return data
         },
-        async session({ session, token }){
-            session = token.user as any
-            return session
+        async session(data:any){
+            return data
         }
     },
 }
