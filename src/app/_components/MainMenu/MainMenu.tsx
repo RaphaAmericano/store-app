@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation"
 import BarMenu from "@/components/BarMenu"
 import { formatMenuItem } from "@/components/BarMenu/BarMenu.utils"
 import { Menubar } from "@/components/ui/menubar"
+import Drawer from "@/components/Drawer"
+import CartDrawer from "../CartDrawer"
 
 const MainMenu = () => {
     const { status } = useSession()
@@ -25,10 +27,14 @@ const MainMenu = () => {
             onClickFn: () => signOut()
         },
     ]
-
     const items = menuItems.map(formatMenuItem);
+
     return <Menubar >
         <BarMenu menuTitle="Menu">{items}</BarMenu>
+        <Drawer openSide="left">      
+            <CartDrawer />
+        </Drawer>
+
     </Menubar>
 }
 

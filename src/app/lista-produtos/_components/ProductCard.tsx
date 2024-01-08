@@ -30,9 +30,6 @@ const ProductCard = (props:ProductProps) => {
                     <p className="text-sm font-medium leading-none">
                     {getFormatedPrice(price)}
                     </p>
-                    <p className="text-sm text-muted-foreground">
-                    {description}
-                    </p>
                 </div>
             </div>
           </CardContent>
