@@ -1,3 +1,4 @@
+"use client"
 import BarMenu from "@/components/BarMenu"
 
 import { Menubar } from "@/components/ui/menubar"
@@ -8,14 +9,18 @@ import Profile from "../Profile"
 import SignOutButton from "./SignOutButton"
 import { BarMenuItemProps } from "@/components/BarMenu/BarMenuItem/BarMenuItem.props"
 import BarMenuItem from "@/components/BarMenu/BarMenuItem"
+import { useSession } from "next-auth/react"
 
 const MainMenu = (props: any) => {
     
-    const session = props;
-    console.log("main menu session", session)
-    if(session === null ){
-        return 
-    }
+    const session = useSession()
+    // console.log(session.avatar)
+    // console.log(session)
+    // const session = props;
+    // console.log("main menu session", session)
+    // if(session === null ){
+    //     return 
+    // }
 
     const menuItems:BarMenuItemProps[] = [
         {
@@ -35,13 +40,13 @@ const MainMenu = (props: any) => {
 
     return  <Menubar >
                 <BarMenu menuTitle="Menu">
-                    {/* {items} */}
+                    {items}
                     <SignOutButton />
                 </BarMenu>
                 <Drawer openSide="left" text="Carrinho">      
                     {/* <CartDrawer /> */}
                 </Drawer>
-                {/* <Profile  {...session}/> */}
+                <Profile  />
             </Menubar>
 }
 

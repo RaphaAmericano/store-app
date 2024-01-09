@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './../globals.css'
+import Providers from '../_store/Providers'
+import Container from '@/components/Container'
 import MainMenu from './_components/MainMenu'
 import { Toaster } from '@/components/ui/toaster'
-import { getServerSession } from 'next-auth'
-import { options } from '../api/auth/[...nextauth]/options'
-import { redirect } from "next/navigation";
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,24 +14,24 @@ export const metadata: Metadata = {
   description: 'Aplicação de exemplo',
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const session = await getServerSession(options);
-  // console.log("session in (auth)layout",session)
-  // if(session === null ){
-  //   redirect("/")
-  // }
+
   return (
     <html lang="en">
       <body className={inter.className}>  
-        <MainMenu {...session} />
-        <main>
-          {children}
-        </main>
-        <Toaster />    
+        <Providers>
+            <main>
+              <Container>
+              <MainMenu />
+                {children}
+              </Container>
+            </main>
+          <Toaster />
+        </Providers>
       </body>
     </html>
   )

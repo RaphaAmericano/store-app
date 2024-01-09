@@ -8,7 +8,7 @@ const service = axios.create({
     }
 })
 
-function parseResponse(response: AxiosResponse){
+function parseResponse(response: AxiosResponse){ 
     return response.data
 }
 

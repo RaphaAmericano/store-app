@@ -2,13 +2,12 @@
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { FieldErrors, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { signIn, useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { getInputValidationCSS } from "@/utils/form.utils";
-import { useState } from "react";
 import Loader from "@/components/Loader";
 
 const validationSchema = z.object({
@@ -23,18 +22,21 @@ const defaultValues:ValidationSchema = {
     password: ""
 }
 
-const Form = () => {
+interface LoginFormProps {
+    loading:boolean;
+    setLoading:(state:boolean) => void
+}
+
+const Form = ({ loading, setLoading }: LoginFormProps ) => {
     const router = useRouter()
-    const session = useSession()
-    const [loading, setLoading] = useState<boolean>(true)
 
     async function singInApi(data:any){
         setLoading(true)
-        const result = await signIn("custom-api", {
+        const result = await signIn("credentials", {
             ...data,
-            redirect: false,
+            redirect: false
         })
-
+        setLoading(false)
         if(result?.error){
             console.error("signin API error:",result?.error)
             return
@@ -62,7 +64,6 @@ const Form = () => {
     
     return <form  onSubmit={handleSubmit(submit, error)} >
         <div className="grid w-full items-center gap-4">
-            {loading && <div className="flex space-y-1.5"><Loader /></div>}
             <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="email">Email</Label>
                 <Input id="email"

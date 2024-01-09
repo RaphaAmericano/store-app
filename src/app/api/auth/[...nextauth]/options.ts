@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { postSignin } from '@/services/auth.service';
+import { redirect } from 'next/navigation';
 
 export const options: NextAuthOptions = {
     providers: [
@@ -15,19 +16,17 @@ export const options: NextAuthOptions = {
             clientSecret: process.env.GITHUB_SECRET as string
         }),
         CredentialsProvider({
-            id:"custom-api",
             name: "credentials",
             credentials:{
                 email: { label: "email", type: "text"},
                 password: { label: "password", type:"password"}
             },
             async authorize(credentials, req){
-                if(credentials === undefined){
-                    return null
-                }
+                if(!credentials?.email || !credentials?.password) return null; 
+
                 const user = await postSignin(credentials);
-                console.log(user)
-                if(user){
+                
+                if(user.id){
                     console.log("user: ",user)
                     return user
                 } else {
@@ -36,31 +35,21 @@ export const options: NextAuthOptions = {
             },
         }),
     ],
-    // session:{
-    //     strategy: "jwt",
-    //     maxAge: 30 * 24 * 60 * 60 
-    // },
-    pages:{
-        // signIn: "/",
-        error: "/error"
-    },
     callbacks: {
-        async session({ session, token }:any ){
+        async jwt({ token, user }) {
+            console.log({ token, user })
+            // if(user) return {...token, ...user }
+            return token
+        },
+        async session({ session, token, user }) {
+            console.log({ session, token, user })
+            // session.user = token.user 
             return session
         },
-        jwt(params:any) {     
-            // console.log("callback jwt", params)       
-            return params
-        }
-        
     },
     events:{
-        async signOut(event:any){
-            // console.log("signOut",event)
-        },
-        async signIn(event:any){
-            // console.log(event)
+        signOut({ session, token }){
+            redirect("/")
         }
-        
     }
 }

@@ -1,3 +1,4 @@
+"use client"
 import {
     Card,
     CardContent,
@@ -8,18 +9,26 @@ import {
 } from "@/components/ui/card"
 import Form from "./Form"
 import OAuthButtons from "./OAuthButtons"
+import { useState } from "react"
+import Loader from "@/components/Loader"
 
 const LoginForm = () => {
+    const [loading, setLoading] = useState<boolean>(false)
+    
     return  <Card className="w-[350px]">
                 <CardHeader>
                     <CardTitle>Login</CardTitle>
                     <CardDescription>Preencha seus dados para entrar</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Form />
+                    <Form loading={loading} setLoading={setLoading} />
+                </CardContent>
+                <CardContent>
+                    
+                    <OAuthButtons />
                 </CardContent>
                 <CardFooter>
-                    <OAuthButtons />
+                    {loading && <Loader />}
                 </CardFooter>
             </Card>
 }
