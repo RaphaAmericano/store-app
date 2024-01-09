@@ -9,10 +9,8 @@ export default async function Home() {
     redirect("/cadastro-produto");
   }
   return (
-    <main>
       <div className="w-screen h-screen flex flex-col items-center justify-center">
         <LoginForm />
       </div>
-    </main>
   );
 }

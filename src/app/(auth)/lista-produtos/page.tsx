@@ -3,11 +3,10 @@ import Products from "./_components/Products";
 
 export default function ListaProdutos(){
     return (
-        <main>
-            <div className="w-screen h-screen flex flex-col items-center justify-evenly">
-                <Heading tag="h2">Lista Produtos</Heading>
-                <Products />
-            </div>
-        </main>
+        <div className="w-screen h-screen flex flex-col items-center justify-evenly">
+            <Heading tag="h2">Lista Produtos</Heading>
+            <Products />
+        </div>
+
     )
 }

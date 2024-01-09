@@ -5,8 +5,6 @@ import {
 } from "@/components/ui/menubar";
 import { BarMenuProps } from "./BarMenu.props";
 
-
-
 const BarMenu = (props: BarMenuProps) => {
   const { menuTitle, children } = props;
   return (

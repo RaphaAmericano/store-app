@@ -5,7 +5,9 @@ import { Label } from "@/components/ui/label"
 import { FieldErrors, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { FormProps } from "@/types/Form.props";
+import { signIn, useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import { getInputValidationCSS } from "@/utils/form.utils";
 
 const validationSchema = z.object({
     email: z.string().min(1, { message: "Tamanho mínimo é 1"}).email({   message: "Deve ser um email válido" }),
@@ -19,29 +21,36 @@ const defaultValues:ValidationSchema = {
     password: ""
 }
 
-function getInputValidationCSS(field:ValidationSchemaKeys, errors: FieldErrors<ValidationSchema>){
-    if(errors[field]?.type === "required" ){
-        return "border-yellow-500"
-    }
-    return "border-red-500"
-}
+const Form = () => {
+    const router = useRouter()
+    const session = useSession()
 
-const Form = (props: FormProps<any, any>) => {
-    const { successCallback, failCallback } = props;
+    async function singInApi(data:any){
+        const result = await signIn("credentials", {
+            ...data,
+            redirect: false
+        })
+
+        if(result?.error){
+            console.error("signin API error:",result?.error)
+            return
+        }
+
+        router.replace("/cadastro-produto")
+    }
+
     const { register, handleSubmit, reset, formState: { errors, isDirty } } = useForm<ValidationSchema>({
         resolver: zodResolver(validationSchema),
         defaultValues
     });
 
     function submit(data:ValidationSchema){
-        console.log(data)
-        successCallback(data)
+        singInApi(data)
         reset(defaultValues)
     }
 
     function error(error: any){
         console.log(error)
-        failCallback()
     }
 
     const emailClassName = isDirty ? getInputValidationCSS("email", errors) : "" ;

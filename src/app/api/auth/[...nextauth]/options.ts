@@ -24,25 +24,31 @@ export const options: NextAuthOptions = {
                 if(credentials === undefined){
                     return null
                 }
-
                 const user = await postSignin(credentials);
-
-                if(!!user.id){
+                console.log(user)
+                if(user){
                     return user
+                } else {
+                    return null
                 }
-                return null
             }
         }),
     ],
-    // pages:{
-    //     signIn: "/"
-    // },
+    pages:{
+        // signIn: "/",
+        error: "/error"
+    },
     callbacks: {
-        async jwt(data){
-            return data
-        },
-        async session(data:any){
-            return data
+        async session(params:any ){
+            
+            console.log("session paramstoken:", params);
+            return params
         }
     },
+    events:{
+        async signOut(event:any){
+            console.log("signOut",event)
+        },
+        
+    }
 }
