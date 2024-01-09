@@ -15,6 +15,7 @@ export const options: NextAuthOptions = {
             clientSecret: process.env.GITHUB_SECRET as string
         }),
         CredentialsProvider({
+            id:"custom-api",
             name: "credentials",
             credentials:{
                 email: { label: "email", type: "text"},
@@ -25,30 +26,40 @@ export const options: NextAuthOptions = {
                     return null
                 }
                 const user = await postSignin(credentials);
-                console.log(user)
                 if(user){
+                    console.log("user: ",user)
                     return user
                 } else {
                     return null
                 }
-            }
+            },
         }),
     ],
+    // session:{
+    //     strategy: "jwt",
+    //     maxAge: 30 * 24 * 60 * 60 
+    // },
     pages:{
         // signIn: "/",
         error: "/error"
     },
     callbacks: {
-        async session(params:any ){
-            
-            // console.log("session paramstoken:", params);
+        async session({ session, token }:any ){
+            return session
+        },
+        jwt(params:any) {     
+            // console.log("callback jwt", params)       
             return params
         }
+        
     },
     events:{
         async signOut(event:any){
             // console.log("signOut",event)
         },
+        async signIn(event:any){
+            // console.log(event)
+        }
         
     }
 }

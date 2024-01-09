@@ -5,9 +5,9 @@ import { redirect } from "next/navigation";
 
 export default async function Home() {
   const session = await getServerSession(options);
-  if (session) {
-    redirect("/cadastro-produto");
-  }
+  // if (session !== null ) {
+  //   redirect("/cadastro-produto");
+  // }
   return (
       <div className="w-screen h-screen flex flex-col items-center justify-center">
         <LoginForm />

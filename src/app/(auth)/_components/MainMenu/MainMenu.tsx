@@ -10,8 +10,13 @@ import { BarMenuItemProps } from "@/components/BarMenu/BarMenuItem/BarMenuItem.p
 import BarMenuItem from "@/components/BarMenu/BarMenuItem"
 
 const MainMenu = (props: any) => {
-    // console.log(props)
-    const { session: { user } } = props;
+    
+    const session = props;
+    console.log("main menu session", session)
+    if(session === null ){
+        return 
+    }
+
     const menuItems:BarMenuItemProps[] = [
         {
             text: "Lista de produtos",
@@ -36,7 +41,7 @@ const MainMenu = (props: any) => {
                 <Drawer openSide="left" text="Carrinho">      
                     {/* <CartDrawer /> */}
                 </Drawer>
-                <Profile  {...user}/>
+                {/* <Profile  {...session}/> */}
             </Menubar>
 }
 
