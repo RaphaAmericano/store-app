@@ -7,7 +7,6 @@ const Profile = async () => {
     if(session?.user?.email === undefined){
         return null
     }
-
     const { user } = session;
     const { name, email, image, avatar, picture } = user;
     const theImage = image ?? avatar ?? picture ?? "https://avatar.iran.liara.run/public/10";
