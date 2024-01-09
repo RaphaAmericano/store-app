@@ -13,7 +13,7 @@ function parseResponse(response: AxiosResponse){
 }
 
 function handleResponseError(error: any){
-    console.log(error)
+    console.error(error)
     return error
 }
 

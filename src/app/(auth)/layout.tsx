@@ -20,7 +20,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const session = await getServerSession(options);
-  console.log("session in (auth)layout",session)
+  // console.log("session in (auth)layout",session)
   if(!session){
     redirect("/")
   }

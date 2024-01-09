@@ -50,7 +50,7 @@ const Form = () => {
     }
 
     function error(error: any){
-        console.log(error)
+        console.error(error)
     }
 
     const emailClassName = isDirty ? getInputValidationCSS("email", errors) : "" ;

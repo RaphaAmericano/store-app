@@ -41,13 +41,13 @@ export const options: NextAuthOptions = {
     callbacks: {
         async session(params:any ){
             
-            console.log("session paramstoken:", params);
+            // console.log("session paramstoken:", params);
             return params
         }
     },
     events:{
         async signOut(event:any){
-            console.log("signOut",event)
+            // console.log("signOut",event)
         },
         
     }

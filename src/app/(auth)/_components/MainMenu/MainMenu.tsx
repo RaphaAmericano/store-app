@@ -10,7 +10,7 @@ import { BarMenuItemProps } from "@/components/BarMenu/BarMenuItem/BarMenuItem.p
 import BarMenuItem from "@/components/BarMenu/BarMenuItem"
 
 const MainMenu = (props: any) => {
-    console.log(props)
+    // console.log(props)
     const { session: { user } } = props;
     const menuItems:BarMenuItemProps[] = [
         {
