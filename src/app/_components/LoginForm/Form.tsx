@@ -8,6 +8,8 @@ import { z } from "zod"
 import { signIn, useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { getInputValidationCSS } from "@/utils/form.utils";
+import { useState } from "react";
+import Loader from "@/components/Loader";
 
 const validationSchema = z.object({
     email: z.string().min(1, { message: "Tamanho mínimo é 1"}).email({   message: "Deve ser um email válido" }),
@@ -24,11 +26,13 @@ const defaultValues:ValidationSchema = {
 const Form = () => {
     const router = useRouter()
     const session = useSession()
+    const [loading, setLoading] = useState<boolean>(true)
 
     async function singInApi(data:any){
-        const result = await signIn("credentials", {
+        setLoading(true)
+        const result = await signIn("custom-api", {
             ...data,
-            redirect: false
+            redirect: false,
         })
 
         if(result?.error){
@@ -58,23 +62,26 @@ const Form = () => {
     
     return <form  onSubmit={handleSubmit(submit, error)} >
         <div className="grid w-full items-center gap-4">
+            {loading && <div className="flex space-y-1.5"><Loader /></div>}
             <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="email">Email</Label>
                 <Input id="email"
                     className={emailClassName} 
+                    disabled={loading}
                     {...register('email', { required: true})} 
                     placeholder="Digite aqui o seu email" />
             </div>
             <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="password">Senha</Label>
                 <Input id="password" 
-                className={passwordClassName}
+                    disabled={loading}
+                    className={passwordClassName}
                     {...register('password', { required: true })} 
                     type="password" 
                     placeholder="Digite aqui a sua senha" />
             </div>
             <div className="flex flex-col space-y-1.5">
-                <Button type="submit">Login</Button>
+                <Button disabled={loading} type="submit">Login</Button>
             </div>
         </div>
     </form>

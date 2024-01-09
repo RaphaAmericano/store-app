@@ -21,9 +21,9 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(options);
   // console.log("session in (auth)layout",session)
-  if(session === null ){
-    redirect("/")
-  }
+  // if(session === null ){
+  //   redirect("/")
+  // }
   return (
     <html lang="en">
       <body className={inter.className}>  

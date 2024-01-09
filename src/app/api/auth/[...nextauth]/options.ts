@@ -26,6 +26,7 @@ export const options: NextAuthOptions = {
                     return null
                 }
                 const user = await postSignin(credentials);
+                console.log(user)
                 if(user){
                     console.log("user: ",user)
                     return user
