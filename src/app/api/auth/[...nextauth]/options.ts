@@ -46,10 +46,5 @@ export const options: NextAuthOptions = {
             // session.user = token.user 
             return session
         },
-    },
-    events:{
-        signOut({ session, token }){
-            redirect("/")
-        }
     }
 }

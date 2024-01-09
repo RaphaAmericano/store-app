@@ -1,17 +1,34 @@
-import { getServerSession } from "next-auth/next";
-import LoginForm from "./_components/LoginForm";
-import { options } from "./api/auth/[...nextauth]/options";
-import { redirect } from "next/navigation";
+"use client"
 
-export default async function Home() {
-  const session = await getServerSession(options);
+import { useSession } from "next-auth/react";
+import LoginForm from "./_components/LoginForm";
+import { redirect } from "next/navigation";
+import Loader from "@/components/Loader";
+
+export default function Home() {
+  const session = useSession()
   console.log(session)
-  if (session?.user.email !== null ) {
-    redirect("/cadastro-produto");
-  }
-  return (
+  const { status } = session;
+  
+
+  if(status === "loading") {
+    return (
       <div className="h-screen flex flex-col items-center justify-center">
-        <LoginForm />
+        <Loader text="Carregando" />
       </div>
-  );
+    )
+  }
+  
+  if(status === "unauthenticated"){
+    return (
+        <div className="h-screen flex flex-col items-center justify-center">
+          <LoginForm />
+        </div>
+    );
+  }
+
+  if(status === "authenticated"){
+    redirect("/cadastro-produto")
+  }
+
 }

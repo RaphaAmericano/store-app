@@ -4,8 +4,10 @@ import { signOut } from "next-auth/react"
 import { useRouter } from "next/navigation"
 const SignOutButton = () => {
     const { replace } = useRouter()
-     function signout(){
-         signOut()   
+     async function signout(){
+        await signOut({ redirect:false })   
+        replace("/")
+
     }
     return <Button variant="ghost" onClick={signout}>Sign Out</Button>
 }
