@@ -6,9 +6,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { signIn } from "next-auth/react"
-import { useRouter } from "next/navigation"
 import { getInputValidationCSS } from "@/utils/form.utils";
-import Loader from "@/components/Loader";
+
 
 const validationSchema = z.object({
     email: z.string().min(1, { message: "Tamanho mínimo é 1"}).email({   message: "Deve ser um email válido" }),
@@ -28,7 +27,6 @@ interface LoginFormProps {
 }
 
 const Form = ({ loading, setLoading }: LoginFormProps ) => {
-    const router = useRouter()
 
     async function singInApi(data:any){
         setLoading(true)
@@ -41,8 +39,6 @@ const Form = ({ loading, setLoading }: LoginFormProps ) => {
             console.error("signin API error:",result?.error)
             return
         }
-
-        router.replace("/cadastro-produto")
     }
 
     const { register, handleSubmit, reset, formState: { errors, isDirty } } = useForm<ValidationSchema>({

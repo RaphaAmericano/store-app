@@ -7,9 +7,7 @@ import Loader from "@/components/Loader";
 
 export default function Home() {
   const session = useSession()
-  console.log(session)
   const { status } = session;
-  
 
   if(status === "loading") {
     return (
