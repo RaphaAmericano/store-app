@@ -4,7 +4,7 @@ export function getInputValidationCSS<T extends keyof any, K extends object >(fi
     if(errors[field]?.type === "required" ){
         return "border-yellow-500"
     }
-    return "border-red-500"
+    return "border-red-500 outline-red-500"
 }
 
 export function getNumericValueOfStringPrice(value:string){

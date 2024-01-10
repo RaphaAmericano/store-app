@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 export default function CadastroProduto(){
-    const session = useSession()
+  const session = useSession()
   const { status } = session;
 
   if(status === "loading") {
@@ -16,10 +16,6 @@ export default function CadastroProduto(){
       </div>
     )
   }
-  
-  if(status === "unauthenticated"){
-    redirect("/")
-  }
 
   if(status === "authenticated"){
     return ( 
@@ -27,7 +23,11 @@ export default function CadastroProduto(){
             <Heading tag="h2">Cadastro Produto</Heading>
             <ProductForm />
         </div>
-)
+    )
   }
-    
+
+  if(status === "unauthenticated" ){
+    redirect("/")
+  }
+  
 }

@@ -4,9 +4,10 @@ import Products from "./_components/Products";
 import Loader from "@/components/Loader";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import SearchBar from "./_components/SearchBar";
 
 export default function ListaProdutos(){
-    const session = useSession()
+  const session = useSession()
   const { status } = session;
 
   if(status === "loading") {
@@ -16,7 +17,7 @@ export default function ListaProdutos(){
       </div>
     )
   }
-  
+
   if(status === "unauthenticated"){
     redirect("/")
   }
@@ -25,6 +26,7 @@ export default function ListaProdutos(){
     return (
         <div className="h-screen flex flex-col items-center justify-evenly">
             <Heading tag="h2">Lista Produtos</Heading>
+            <SearchBar />
             <Products />
         </div>
 

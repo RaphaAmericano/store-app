@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { FormMessageProps } from "./FormMessage.props"
 
 const FormMessage = (props: FormMessageProps) => {
-    const { text, type } = props
+    const { text, type, className } = props
     const color = () => {
         switch (type) {
             case "success":
@@ -15,7 +15,7 @@ const FormMessage = (props: FormMessageProps) => {
         }
     }
     return (
-        <small className={clsx("text-sm font-medium leading-none", color())}>{text}</small>
+        <small className={clsx("text-sm font-medium leading-none", className, color())}>{text}</small>
     )
 }
 

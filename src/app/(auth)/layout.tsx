@@ -6,7 +6,6 @@ import Container from '@/components/Container'
 import MainMenu from './_components/MainMenu'
 import { Toaster } from '@/components/ui/toaster'
 
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -15,11 +14,10 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode
 }) {
-
   return (
     <html lang="en">
       <body className={inter.className}>  
@@ -27,7 +25,6 @@ export default function RootLayout({
           <MainMenu />
             <main>
               <Container>
-          
                 {children}
               </Container>
             <Toaster />

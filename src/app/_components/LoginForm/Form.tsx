@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { signIn } from "next-auth/react"
 import { getInputValidationCSS } from "@/utils/form.utils";
+import FormMessage from "@/components/FormMessage";
 
 
 const validationSchema = z.object({
@@ -55,8 +56,8 @@ const Form = ({ loading, setLoading }: LoginFormProps ) => {
         console.error(error)
     }
 
-    const emailClassName = isDirty ? getInputValidationCSS("email", errors) : "" ;
-    const passwordClassName = isDirty ? getInputValidationCSS("password", errors) : "" ;
+    const emailClassName = (errors.email && isDirty) ? getInputValidationCSS<ValidationSchemaKeys, ValidationSchema>("email", errors) : "" ;
+    const passwordClassName = (errors.password && isDirty) ? getInputValidationCSS<ValidationSchemaKeys, ValidationSchema>("password", errors) : "" ;
     
     return <form  onSubmit={handleSubmit(submit, error)} >
         <div className="grid w-full items-center gap-4">
@@ -67,15 +68,18 @@ const Form = ({ loading, setLoading }: LoginFormProps ) => {
                     disabled={loading}
                     {...register('email', { required: true})} 
                     placeholder="Digite aqui o seu email" />
+                    {(errors.email && errors.email.message && isDirty) && <FormMessage text={errors.email.message} type="danger"/>}
             </div>
             <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="password">Senha</Label>
                 <Input id="password" 
+                    autoComplete="current-password"
                     disabled={loading}
                     className={passwordClassName}
                     {...register('password', { required: true })} 
                     type="password" 
                     placeholder="Digite aqui a sua senha" />
+                    {(errors.password && errors.password.message && isDirty) && <FormMessage text={errors.password.message} type="danger"/>}
             </div>
             <div className="flex flex-col space-y-1.5">
                 <Button disabled={loading} type="submit">Login</Button>

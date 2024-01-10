@@ -5,9 +5,7 @@ import { useRouter } from "next/navigation"
 const SignOutButton = () => {
     const { replace } = useRouter()
      async function signout(){
-        await signOut({ redirect:false })   
-        replace("/")
-
+        await signOut({ callbackUrl:"/" })   
     }
     return <Button variant="ghost" onClick={signout}>Sign Out</Button>
 }

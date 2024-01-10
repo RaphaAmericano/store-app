@@ -19,7 +19,7 @@ const ProductForm = () => {
     function saveProduct(product:ProductProps){
         addProduct(product);
         toast({
-            title: `Novo produto ${product.name} salvo com sucess`,
+            title: `Novo produto ${product.name} salvo com sucesso`,
             description: `Nome: ${product.name}\nPreço:${getFormatedPrice(product.price)}\nDescrição:${product.description}`
         })
     }
