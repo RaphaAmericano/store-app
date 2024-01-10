@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { getInputValidationCSS, getNumericValueOfStringPrice } from "@/utils/form.utils";
 import { FormProps } from "@/types/Form.props";
-import { ChangeEvent } from "react"
+import { ChangeEvent, KeyboardEvent } from "react"
 import * as masks from "@/utils/mask.utils"
 import FormMessage from "@/components/FormMessage"
 import { v4 } from "uuid"
@@ -61,6 +61,13 @@ const Form = (props: FormProps<any, any>) => {
 
     function error(){
         failCallback()
+    }
+
+    function keyEnter(event:KeyboardEvent<HTMLInputElement> ){
+        const { key } = event;
+        if(key === "Enter"){
+            handleSubmit(submit, error)
+        }
     }
 
     const nameClassName = (errors.name && isDirty) ? getInputValidationCSS<ValidationSchemaKeys, ValidationSchema>("name", errors) : "" ;

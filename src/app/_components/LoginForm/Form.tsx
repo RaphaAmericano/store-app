@@ -8,6 +8,7 @@ import { z } from "zod"
 import { signIn } from "next-auth/react"
 import { getInputValidationCSS } from "@/utils/form.utils";
 import FormMessage from "@/components/FormMessage";
+import { KeyboardEvent } from "react";
 
 
 const validationSchema = z.object({
@@ -56,6 +57,13 @@ const Form = ({ loading, setLoading }: LoginFormProps ) => {
         console.error(error)
     }
 
+    function keyEnter(event:KeyboardEvent<HTMLInputElement> ){
+        const { key } = event;
+        if(key === "Enter"){
+            handleSubmit(submit, error)
+        }
+    }
+
     const emailClassName = (errors.email && isDirty) ? getInputValidationCSS<ValidationSchemaKeys, ValidationSchema>("email", errors) : "" ;
     const passwordClassName = (errors.password && isDirty) ? getInputValidationCSS<ValidationSchemaKeys, ValidationSchema>("password", errors) : "" ;
     
@@ -73,6 +81,7 @@ const Form = ({ loading, setLoading }: LoginFormProps ) => {
             <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="password">Senha</Label>
                 <Input id="password" 
+                    onKeyDown={keyEnter}
                     autoComplete="current-password"
                     disabled={loading}
                     className={passwordClassName}
