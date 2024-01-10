@@ -1,3 +1,4 @@
+import { Root } from "@radix-ui/react-menubar"
 import BarMenu from "@/components/BarMenu"
 import { Menubar } from "@/components/ui/menubar"
 import Drawer from "@/components/Drawer"
@@ -6,7 +7,7 @@ import Profile from "../Profile"
 import SignOutButton from "./SignOutButton"
 import { BarMenuItemProps } from "@/components/BarMenu/BarMenuItem/BarMenuItem.props"
 import BarMenuItem from "@/components/BarMenu/BarMenuItem"
-
+import MainMenuWrapper from "./MainMenuWrapper"
 
 const MainMenu = () => {
 
@@ -26,7 +27,7 @@ const MainMenu = () => {
     ]
     const items = menuItems.map((item) => <BarMenuItem key={item.text.toLowerCase().split(" ").join("")} {...item}/>);
 
-    return  <Menubar >
+    return  <MainMenuWrapper >
                 <BarMenu menuTitle="Menu">
                     {items}
                     <SignOutButton />
@@ -35,7 +36,7 @@ const MainMenu = () => {
                     <CartDrawer />
                 </Drawer>
                 <Profile  />
-            </Menubar>
+            </MainMenuWrapper>
 }
 
 export default MainMenu

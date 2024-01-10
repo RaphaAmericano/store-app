@@ -16,9 +16,9 @@ import { getFormatedPrice } from "@/utils/generic.utils";
 const ProductCard = (props:ProductProps) => {
     const { actions: { addProduct } } = useCartStore()
     const { id, description, name, price } = props;
-
+  // className="w-[350px]"
     return (
-        <Card className="w-[350px]">
+        <Card>
           <CardHeader>
             <CardTitle>{name}</CardTitle>
             <CardDescription>{description}</CardDescription>

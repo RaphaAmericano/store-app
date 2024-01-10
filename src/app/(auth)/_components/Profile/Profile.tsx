@@ -10,8 +10,8 @@ const Profile = async () => {
     const { user } = session;
     const { name, email, image, avatar, picture } = user;
     const theImage = image ?? avatar ?? picture ?? "https://avatar.iran.liara.run/public/10";
-    return <div className="flex items-center w-full self-end">
-        <Image width={30} height={10} src={theImage} alt={`Foto ou avatar do usuário ${name}`} />
+    return <div className="flex items-center ml-auto">
+        <Image className="rounded-full" width={30} height={10} src={theImage} alt={`Foto ou avatar do usuário ${name}`} />
         <small>{name} : {email}</small>
     </div>
 }
